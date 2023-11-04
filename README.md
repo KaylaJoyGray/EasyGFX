@@ -19,7 +19,9 @@ By default, You will need both SDL2 and SDL2_images. You can omit images by defi
 # Caveats:
 1. The feature set is extremely limited for now, and only includes the SDL functions I use for some tile-based games and test programs.
 2. Smart pointers are still pointers, and must be handled correctly.
-3. The SDL library is exposed in the header. I may change this later after more features have been added, to make this a proper library.
+3. Render_Context is not copyable or moveable, and you can only have Render_Context safely. This will be fixed.
+4. The SDL library is exposed in the header. I may change this later after more features have been added, to make this a proper library.
+5. Read the source code first and change what you want, it's very short.
 
 # Planned features:
 1. Sprite renderer

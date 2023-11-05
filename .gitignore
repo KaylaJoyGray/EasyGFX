@@ -1,3 +1,8 @@
+# Test Build Files
+CMakeLists.txt
+cmake-build-debug/
+cmake/
+
 # Prerequisites
 *.d
 

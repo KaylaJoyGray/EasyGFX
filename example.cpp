@@ -3,19 +3,19 @@
  * Created by Kayla 11/3/23
  ***************************************/
 
-#include "rendering.hpp"
+#include "src/rendering.hpp"
 #include <iostream>
 #include <csignal>
 
 int main(int argc, char** argv) {
 
 	try {
-		gfx::Render_Context my_render("Hello World", 600, 400, true);
+		gfx::Render_Context my_render("Hello World", 600, 400, false);
 
 		my_render.set_draw_color(255, 255, 255);
 		my_render.clear();
 
-		auto [width, height] = my_render.display_size();
+		auto [width, height] = my_render.canvas_size();
 
 		my_render.set_draw_color(0, 0, 0);
 		my_render.draw_line(0, 0, width, height);

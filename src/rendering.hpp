@@ -47,6 +47,7 @@ namespace gfx {
 			Render_Context& operator=(Render_Context&&) = delete;
 
 			std::pair<int, int> display_size();
+			std::pair<int, int> canvas_size();
 
 			void set_draw_color(int r, int g, int b, int a = 255);
 

@@ -120,7 +120,9 @@ namespace gfx {
 		multimedia_quit();
 	}
 
-	std::pair<int, int> Render_Context::display_size() {
+	std::pair<int, int> Render_Context::display_size()
+	// returns the size of the current display. The first value of the pair is width, the second is height.
+	{
 		std::pair<int, int> screen_dims;
 		SDL_DisplayMode current_display;
 
@@ -134,6 +136,18 @@ namespace gfx {
 		}
 
 		return screen_dims;
+	}
+
+	std::pair<int, int> Render_Context::canvas_size()
+	// returns the size of the drawable area. The first value of the pair is the width, the second is height.
+	{
+		std::pair<int, int> size;
+
+		if (SDL_GetRendererOutputSize(m_render.get(), &size.first, &size.second) != 0) {
+			throw std::runtime_error(SDL_GetError());
+		}
+
+		return size;
 	}
 
 	void Render_Context::set_draw_color(int r, int g, int b, int a) {

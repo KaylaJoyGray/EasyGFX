@@ -108,7 +108,8 @@ namespace gfx {
 		}
 	}
 
-	Render_Context::Render_Context(const std::string &title, int width, int height, bool fullscreen, bool accelerated, bool vsync) {
+	Render_Context::Render_Context(const std::string &title, int width, int height, bool fullscreen, bool vsync,
+	                               bool accelerated) {
 		multimedia_start();
 
 		m_window = create_window(title.c_str(), width, height, fullscreen);
@@ -152,7 +153,12 @@ namespace gfx {
 
 	void Render_Context::set_draw_color(int r, int g, int b, int a) {
 		SDL_SetRenderDrawColor(m_render.get(), r, g, b, a);
-		SDL_SetRenderDrawBlendMode(m_render.get(), SDL_BLENDMODE_MOD);
+	}
+
+	void Render_Context::set_draw_blend_mode(BlendMode mode) {
+		if (SDL_SetRenderDrawBlendMode(m_render.get(), mode) != 0) {
+			throw std::runtime_error(SDL_GetError());
+		}
 	}
 
 	void Render_Context::draw_point(int x, int y) {
@@ -203,6 +209,12 @@ namespace gfx {
 	}
 	#endif
 
+	void Render_Context::set_texture_blend_mode(Text_Ptr &texture, BlendMode mode) {
+		if (SDL_SetTextureBlendMode(texture.get(), mode) != 0) {
+			throw std::runtime_error(SDL_GetError());
+		}
+	}
+
 	void Render_Context::render_texture(Text_Ptr &texture, Rect *src, Rect *dest, double rot)
 	// renders a texture with src and dest rectangles
 	{
@@ -216,6 +228,7 @@ namespace gfx {
 	void Render_Context::present() {
 		SDL_RenderPresent(m_render.get());
 	}
+
 }
 
 
